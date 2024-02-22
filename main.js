@@ -41,3 +41,4 @@ let score = 0; // кол-во правильных ответов
 let questionIndex = 0; // текущий вопрос
 
 headerContainer.innerHTML = "";
+headerContainer.innerHTML = "";
