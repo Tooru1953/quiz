@@ -40,5 +40,35 @@ const submitBtn = document.querySelector("#submit");
 let score = 0; // кол-во правильных ответов
 let questionIndex = 0; // текущий вопрос
 
-headerContainer.innerHTML = "";
-headerContainer.innerHTML = "";
+clearPage();
+showQuestion();
+
+function clearPage() {
+  headerContainer.innerHTML = "";
+  listContainer.innerHTML = "";
+}
+
+function showQuestion() {
+  //? вопрос
+  const headerTemplate = `<h2 class="title">%title%</h2>`;
+  const title = headerTemplate.replace(
+    "%title%",
+    questions[questionIndex]["question"]
+  );
+  headerContainer.innerHTML = title;
+
+  //? варианты ответов
+  for (answerText of questions[questionIndex]["answers"]) {
+    const questionTamplate = `
+  <li>
+    <label>
+      <input type="radio" class="answer" name="answer" />
+      <span>%answer%</span>
+    </label>
+  </li>`;
+
+    const answerHTML = questionTamplate.replace("%answer%", answerText);
+
+    listContainer.innerHTML += answerHTML;
+  }
+}
