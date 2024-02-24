@@ -42,6 +42,7 @@ let questionIndex = 0; // текущий вопрос
 
 clearPage();
 showQuestion();
+submitBtn.onclick = checkAnswer;
 
 function clearPage() {
   headerContainer.innerHTML = "";
@@ -70,5 +71,15 @@ function showQuestion() {
     const answerHTML = questionTamplate.replace("%answer%", answerText);
 
     listContainer.innerHTML += answerHTML;
+  }
+}
+
+function checkAnswer() {
+  //? находим выбранную радиокнопку
+  const checkedRadio = listContainer.querySelector("input:checked");
+
+  if (!checkedRadio) {
+    submitBtn.blur();
+    return;
   }
 }
