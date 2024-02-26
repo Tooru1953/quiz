@@ -106,5 +106,31 @@ function checkAnswer() {
 }
 
 function showResults() {
-  console.log();
+  const resultsTemplate = `
+    <h2 class="title">%title%</h2>
+    <h3 class="summary">%message%</h3>
+    <p class="result">%result%</p>
+  `;
+  let title, message;
+  //? варианты заголовков и текстов
+  if (score === questions.lenght) {
+    title = "Поздравляем!";
+    message = "Вы ответили верно на все вопросы!";
+  } else if ((score * 100) / questions.length >= 50) {
+    title = "Неплохой результат!";
+    message = "Вы дали более половины правильных ответов!";
+  } else {
+    title = "Стоит постораться";
+    message = "Пока у вас меньше половины правильных ответов!";
+  }
+  //? результат
+  let result = `${score} из ${questions.length}`;
+
+  //? финальный ответ, подставляем данные в шаблон
+  const finalMessage = resultsTemplate
+    .replace("%title%", title)
+    .replace("%message%", message)
+    .replace("%result%", result);
+
+  headerContainer.innerHTML = finalMessage;
 }
