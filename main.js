@@ -59,16 +59,18 @@ function showQuestion() {
   headerContainer.innerHTML = title;
 
   //? варианты ответов
-  for (answerText of questions[questionIndex]["answers"]) {
+  for ([index, answerText] of questions[questionIndex]["answers"].entries()) {
     const questionTamplate = `
   <li>
     <label>
-      <input type="radio" class="answer" name="answer" />
+      <input value="%number%" type="radio" class="answer" name="answer" />
       <span>%answer%</span>
     </label>
   </li>`;
 
-    const answerHTML = questionTamplate.replace("%answer%", answerText);
+    const answerHTML = questionTamplate
+      .replace("%answer%", answerText)
+      .replace("%number%", answerText);
 
     listContainer.innerHTML += answerHTML;
   }
@@ -78,8 +80,31 @@ function checkAnswer() {
   //? находим выбранную радиокнопку
   const checkedRadio = listContainer.querySelector("input:checked");
 
+  //? если ответ не выбран - ничего не делаем, выходим из функции
   if (!checkedRadio) {
     submitBtn.blur();
     return;
   }
+
+  //? узнаём номер ответа пользователя
+  const userAnswer = parseInt(checkedRadio.value);
+
+  //? если ответ верно - увеличиваем счет
+  questions[questionIndex]["correct"];
+  if (userAnswer === questions[questionIndex]["correct"]) {
+    score++;
+  }
+
+  if (questionIndex !== questions.length - 1) {
+    questionIndex++;
+    clearPage();
+    showQuestion();
+  } else {
+    clearPage();
+    showResults();
+  }
+}
+
+function showResults() {
+  console.log();
 }
